@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyEventBus</string>
+    <string name="base_server_ip">http:127.0.0.1:8080/</string>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login">com.mitnick.root.myeventbus.model.LoginBusModel</string>
+    <string name="regist">com.mitnick.root.myeventbus.model.RegistBusModel</string>
+</resources>
+
+<!--<beans>-->
+<!--<bean>-->
+    <!--<event>login</event>-->
+    <!--<model>com.mitnick.root.myeventbus.model.LoginBusModel</model>-->
+<!--</bean>-->
+<!--<bean>-->
+    <!--<event>regist</event>-->
+    <!--<model>com.mitnick.root.myeventbus.model.RegistBusModel</model>-->
+<!--</bean>-->
+<!--</beans>-->

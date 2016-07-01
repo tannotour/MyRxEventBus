@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--配置文件，事件到model的映射-->
+<!--例：以下为login事件被映射给com.mitnick.root.myeventbus.model.LoginBusModel处理-->
+<resources>
+    <beans>
+        <bean>
+            <event>login</event>
+            <model>com.mitnick.root.myeventbus.model.LoginBusModel</model>
+        </bean>
+    </beans>
+</resources>
+
