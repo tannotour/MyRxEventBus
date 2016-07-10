@@ -27,7 +27,7 @@ public class MyBusService extends Service {
                 this,
                 new String[]{"MyBusService"}//监听的TAG
         );
-        NetAPIFactory.netAPIInit(this.getString(R.string.base_server_ip));//初始化网络请求
+        NetAPIFactory.netAPIInit(this.getString(R.string.base_server_ip), null);//初始化网络请求
 //        RxBus.getDefault().post(new RxBusEvent("MyBusService","login",null));
     }
 
