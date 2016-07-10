@@ -184,29 +184,29 @@ public class RxBus {
      * 现阶段一个Subscription只能订阅一个model事件，如果需要订阅多个model事件就需要定义多个Subscription
      * */
     public static Subscription viewSubscription(@NonNull Context context,
-                                            @Nullable final String event){
-        final ResponseNode responseNode = HandlerFactory.getHandler(context,EventMap.getViewMap(event,context));
+                                            @Nullable final String[] events){
+        final ResponseNode responseNode = HandlerFactory.getHandler(context,EventMap.getViewMap(events,context));
         final Map<String, String> modelMap = EventMap.getServiceMap(context);
         return getDefault().toObserverable(RxBusEvent.class)
                 .filter(new Func1<RxBusEvent, Boolean>() {
                     @Override
                     public Boolean call(RxBusEvent rxBusEvent) {
-//                        if(null == events){
-//                            //没有过滤条件
-//                            return true;
-//                        }
-//                        for(String event : events){
-//                            if(modelMap.containsKey(event)){
-//                                if(rxBusEvent.getTag().equals(modelMap.get(event))){
-//                                    return true;//找到了event对应的model名字
-//                                }
-//                            }
-//                        }
-                        if(modelMap.containsKey(event)){
-                            if(rxBusEvent.getTag().equals(modelMap.get(event))){
-                                return true;//找到了event对应的model名字
+                        if(null == events){
+                            //没有过滤条件
+                            return true;
+                        }
+                        for(String event : events){
+                            if(modelMap.containsKey(event)){
+                                if(rxBusEvent.getTag().equals(modelMap.get(event))){
+                                    return true;//找到了event对应的model名字
+                                }
                             }
                         }
+//                        if(modelMap.containsKey(event)){
+//                            if(rxBusEvent.getTag().equals(modelMap.get(event))){
+//                                return true;//找到了event对应的model名字
+//                            }
+//                        }
                         return false;
                     }
                 })

@@ -331,4 +331,63 @@ public class HandlerFactory {
         return responseNode;//返回职责链的头节点
     }
 
+    /**
+     * @param context 传入一个Activity用于回调方法
+     * @param eventMap 事件名称的一个转换，总线消息发送者无需知道接受者要回调哪个函数来实现
+     * @return responseNode
+     * */
+//    public static ResponseNode getHandler(final Context context,
+//                                          final Map<String, String> eventMap){
+//        ResponseNode responseNode = getHandler();
+//        ResponseNode buffer = responseNode;
+//        Object[] events = eventMap.keySet().toArray();
+//        for(final Object event : events){
+//            buffer = buffer.setHandler(new ResponseNode(new DoSomthing((String)event) {
+//                @Override
+//                public boolean dosomthing() {
+//                    Method method;
+//                    String bufferClass = (String)event;
+//                    if(eventMap.containsKey(event)){
+//                        bufferClass = eventMap.get(event);
+//                    }
+//                    try {
+//                        method = context.getClass().getMethod(bufferClass,RxBusEvent.class);
+//                        method.invoke(context,getRxBusEvent());
+//                    } catch (NoSuchMethodException ee1) {
+//                        ee1.printStackTrace();
+//                        Log.e("HandlerFactory",ee1.toString());
+//                        try {
+//                            method = context.getClass().getMethod(bufferClass);
+//                            method.invoke(context);
+//                        } catch (NoSuchMethodException e1) {
+//                            e1.printStackTrace();
+//                            Log.e("HandlerFactory",e1.toString());
+//                            return filter();
+//                        } catch (InvocationTargetException e2) {
+//                            e2.printStackTrace();
+//                            Log.e("HandlerFactory",e2.toString());
+//                            return filter();
+//                        } catch (IllegalAccessException e3) {
+//                            e3.printStackTrace();
+//                            Log.e("HandlerFactory",e3.toString());
+//                            return filter();
+//                        }
+//                        return filter();
+//                    } catch (InvocationTargetException ee2){
+//                        ee2.printStackTrace();
+//                        Log.e("HandlerFactory",ee2.toString());
+//                        return filter();
+//                    } catch (IllegalAccessException ee3){
+//                        ee3.printStackTrace();
+//                        Log.e("HandlerFactory",ee3.toString());
+//                        return filter();
+//                    }
+//                    return filter();
+//                }
+//            }));
+//        }
+////        buffer.setHandler(responseNode);//循环职责链
+//        return responseNode;//返回职责链的头节点
+//    }
+
 }
