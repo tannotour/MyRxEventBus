@@ -330,4 +330,5 @@ public class HandlerFactory {
 //        buffer.setHandler(responseNode);//循环职责链
         return responseNode;//返回职责链的头节点
     }
+
 }

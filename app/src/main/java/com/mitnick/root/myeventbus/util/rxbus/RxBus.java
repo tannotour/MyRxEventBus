@@ -141,7 +141,7 @@ public class RxBus {
     /**
      * 只给activity用
      * */
-    public static Subscription subscription(@NonNull Context context,
+    public static Subscription viewSubscription(@NonNull Context context,
                                             @Nullable final String[] events,
                                             @Nullable final Map<String,String> reflact){
         final ResponseNode responseNode = HandlerFactory.getHandler(context,reflact);
@@ -159,6 +159,52 @@ public class RxBus {
                                 if(rxBusEvent.getTag().equals(modelMap.get(event))){
                                     return true;//找到了event对应的model名字
                                 }
+                            }
+                        }
+                        return false;
+                    }
+                })
+                .subscribe(new Action1<RxBusEvent>() {
+                               @Override
+                               public void call(final RxBusEvent rxBusEvent) {
+                                   responseNode.operator(rxBusEvent);//开启职责链处理事件
+                               }
+                           },
+                        new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                                // TODO: 处理异常
+                                Log.e("事件总线",throwable.toString());
+                            }
+                        });
+    }
+
+    /**
+     * 只给activity用
+     * 现阶段一个Subscription只能订阅一个model事件，如果需要订阅多个model事件就需要定义多个Subscription
+     * */
+    public static Subscription viewSubscription(@NonNull Context context,
+                                            @Nullable final String event){
+        final ResponseNode responseNode = HandlerFactory.getHandler(context,EventMap.getViewMap(event,context));
+        final Map<String, String> modelMap = EventMap.getServiceMap(context);
+        return getDefault().toObserverable(RxBusEvent.class)
+                .filter(new Func1<RxBusEvent, Boolean>() {
+                    @Override
+                    public Boolean call(RxBusEvent rxBusEvent) {
+//                        if(null == events){
+//                            //没有过滤条件
+//                            return true;
+//                        }
+//                        for(String event : events){
+//                            if(modelMap.containsKey(event)){
+//                                if(rxBusEvent.getTag().equals(modelMap.get(event))){
+//                                    return true;//找到了event对应的model名字
+//                                }
+//                            }
+//                        }
+                        if(modelMap.containsKey(event)){
+                            if(rxBusEvent.getTag().equals(modelMap.get(event))){
+                                return true;//找到了event对应的model名字
                             }
                         }
                         return false;

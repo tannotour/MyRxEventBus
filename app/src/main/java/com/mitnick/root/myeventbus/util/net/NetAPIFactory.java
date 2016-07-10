@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetAPIFactory {
 
-    private static NetAPI netAPI = null;
+    private static BaseNetAPI netAPI = null;
     private static Retrofit retrofit = null;
 
     public static void netAPIInit(String base_server_ip){
@@ -47,7 +47,7 @@ public class NetAPIFactory {
                     .build();
         }
         if(null == netAPI){
-            netAPI = retrofit.create(NetAPI.class);
+            netAPI = retrofit.create(BaseNetAPI.class);
         }
     }
 
@@ -71,7 +71,7 @@ public class NetAPIFactory {
                     .build();
         }
         if(null == netAPI){
-            netAPI = retrofit.create(NetAPI.class);
+            netAPI = retrofit.create(BaseNetAPI.class);
         }
     }
 
@@ -126,7 +126,7 @@ public class NetAPIFactory {
         builder.addInterceptor(headerInterceptor );
     }
 
-    public static NetAPI getNetAPIInstance(){
+    public static BaseNetAPI getNetAPIInstance(){
         return netAPI;
     }
 }

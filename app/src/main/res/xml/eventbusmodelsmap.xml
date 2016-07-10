@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--配置文件，事件到model的映射-->
 <!--例：以下为login事件被映射给com.mitnick.root.myeventbus.model.LoginBusModel处理-->
+<!--result中的name为model返回的事件名称，value为activity中需要回调的方法-->
 <resources>
     <beans>
         <bean>
             <event>login</event>
-            <model>com.mitnick.root.myeventbus.model.LoginBusModel</model>
+            <model>com.mitnick.root.myeventbus.util.model.LoginBusModel</model>
+            <result>
+                <name>loginOk</name>
+                <value>loginOk</value>
+            </result>
+            <result>
+                <name>loginError</name>
+                <value>loginError</value>
+            </result>
         </bean>
     </beans>
 </resources>

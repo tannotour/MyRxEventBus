@@ -24,8 +24,8 @@ public class EventMap {
             while(eventType != XmlPullParser.END_DOCUMENT){
                 switch (eventType) {
                     // 判断当前事件是否为文档开始事件
-                    case XmlPullParser.START_DOCUMENT:
-                        break;
+//                    case XmlPullParser.START_DOCUMENT:
+//                        break;
                     // 判断当前事件是否为标签元素开始事件
                     case XmlPullParser.START_TAG:
                         if (xrp.getName().equals("bean")) { // 判断开始标签元素是否是bean
@@ -52,5 +52,48 @@ public class EventMap {
             return serviceMap;
         }
         return serviceMap;
+    }
+
+    public static Map<String, String> getViewMap(String getByEvent, Context context){
+        XmlResourceParser xrp = context.getResources().getXml(R.xml.eventbusmodelsmap);
+        //解析xml并返回
+        Map<String,String> viewMap = new HashMap<>();
+        try{
+            String event = "",name = "",value = "";
+            int eventType = xrp.getEventType();
+            boolean flag = true;
+            while(flag && eventType != XmlPullParser.END_DOCUMENT){
+                switch (eventType) {
+                    // 判断当前事件是否为标签元素开始事件
+                    case XmlPullParser.START_TAG:
+                        if (xrp.getName().equals("event")) {
+                            event = xrp.getText();
+                        } else if (xrp.getName().equals("name")) {
+                            name = xrp.getText();
+                        } else if (xrp.getName().equals("value")) {
+                            value = xrp.getText();
+                        }
+                        break;
+                    // 判断当前事件是否为标签元素结束事件
+                    case XmlPullParser.END_TAG:
+                        if (xrp.getName().equals("result")) { // 判断结束标签元素是否是bean
+                            if(event.equals(getByEvent)){
+                                viewMap.put(name,value);
+                            }
+                        } else if(xrp.getName().equals("bean")){
+                            if(viewMap.size() != 0){
+                                flag = false;
+                                break;
+                            }
+                        }
+                }
+                // 进入下一个元素并触发相应事件
+                eventType = xrp.next();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return viewMap;
+        }
+        return viewMap;
     }
 }

@@ -49,7 +49,11 @@ public abstract class BusModel implements Observable.OnSubscribe<Object> {
                     @Override
                     public void onNext(Object object) {
                         //post(object);
-                        RxBus.getDefault().post(new RxBusEvent(getModelName(),getEvent(),object));
+                        if(object instanceof RxBusEvent){
+                            RxBus.getDefault().post((RxBusEvent) object);
+                        }else{
+                            RxBus.getDefault().post(new RxBusEvent(getModelName(),getEvent(),object));
+                        }
                         unSubscribe();
                     }
                 });
