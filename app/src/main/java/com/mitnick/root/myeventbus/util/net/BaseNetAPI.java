@@ -41,5 +41,5 @@ public interface BaseNetAPI {
             @Path("url") String url,
             @Path("headers") Map<String, String> headers,
             @Part("filename") String description,
-            @PartMap()  Map<String, RequestBody> maps);
+            @PartMap() Map<String, RequestBody> maps);
 }

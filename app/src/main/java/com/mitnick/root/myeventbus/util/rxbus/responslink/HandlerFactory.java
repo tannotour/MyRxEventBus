@@ -337,7 +337,7 @@ public class HandlerFactory {
      * @return responseNode
      * */
 //    public static ResponseNode getHandler(final Context context,
-//                                          final Map<String, String> eventMap){
+//                                          final Map<String, Map<String, String> > eventMap){
 //        ResponseNode responseNode = getHandler();
 //        ResponseNode buffer = responseNode;
 //        Object[] events = eventMap.keySet().toArray();
@@ -345,6 +345,9 @@ public class HandlerFactory {
 //            buffer = buffer.setHandler(new ResponseNode(new DoSomthing((String)event) {
 //                @Override
 //                public boolean dosomthing() {
+//
+//                    eventMap.containsValue(getRxBusEvent().getTag())
+//
 //                    Method method;
 //                    String bufferClass = (String)event;
 //                    if(eventMap.containsKey(event)){

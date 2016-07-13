@@ -67,10 +67,13 @@ public class EventMap {
                     // 判断当前事件是否为标签元素开始事件
                     case XmlPullParser.START_TAG:
                         if (xrp.getName().equals("event")) {
+                            eventType = xrp.next();
                             event = xrp.getText();
                         } else if (xrp.getName().equals("name")) {
+                            eventType = xrp.next();
                             name = xrp.getText();
                         } else if (xrp.getName().equals("value")) {
+                            eventType = xrp.next();
                             value = xrp.getText();
                         }
                         break;
@@ -104,40 +107,25 @@ public class EventMap {
         try{
             String event = "",name = "",value = "";
             int eventType = xrp.getEventType();
-            boolean flag = true;
-            int nums = 0;
-            boolean numsFlag = false;
-            while(flag && eventType != XmlPullParser.END_DOCUMENT){
+            while(eventType != XmlPullParser.END_DOCUMENT){
                 switch (eventType) {
                     // 判断当前事件是否为标签元素开始事件
                     case XmlPullParser.START_TAG:
                         if (xrp.getName().equals("event")) {
+                            eventType = xrp.next();
                             event = xrp.getText();
                         } else if (xrp.getName().equals("name")) {
+                            eventType = xrp.next();
                             name = xrp.getText();
                         } else if (xrp.getName().equals("value")) {
+                            eventType = xrp.next();
                             value = xrp.getText();
                         }
                         break;
                     // 判断当前事件是否为标签元素结束事件
                     case XmlPullParser.END_TAG:
                         if (xrp.getName().equals("result")) {
-                            for(String getByEvent : getByEvents){
-                                if(event.equals(getByEvent)){
-                                    viewMap.put(name,value);
-                                    numsFlag = true;
-                                }
-                            }
-
-                        } else if(xrp.getName().equals("bean")){
-                            if(numsFlag){
-                                nums++;
-                            }
-                            numsFlag = false;
-                            if(nums == getByEvents.length){
-                                flag = false;
-                                break;
-                            }
+                            viewMap.put(name,value);
                         }
                 }
                 // 进入下一个元素并触发相应事件
