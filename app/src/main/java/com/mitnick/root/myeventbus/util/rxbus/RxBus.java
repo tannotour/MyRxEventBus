@@ -12,6 +12,7 @@ import com.mitnick.root.myeventbus.util.rxbus.responslink.ResponseNode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import rx.Observable;
 import rx.Subscription;
@@ -55,6 +56,15 @@ public class RxBus {
      * */
     public void post (RxBusEvent rxBusEvent) {
         bus.onNext(rxBusEvent);
+    }
+
+    /**
+     * 事件总线发射一个事件
+     * @Param event : 事件
+     * @Param object : 要发送的对象
+     * */
+    public void post (String event, Object object) {
+        bus.onNext(new RxBusEvent("MyBusService",event,object));
     }
 
     /**
